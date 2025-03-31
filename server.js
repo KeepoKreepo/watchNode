@@ -35,23 +35,30 @@ const Watch = mongoose.model("Watch", WatchSchema);
 // Get all watches
 app.get("/watches", async (req, res) => {
     try {
-        const { brand, maxPrice, type, movement, use_case } = req.query;
-        let filters = {};
+        let filters = {};  
 
-        if (brand) filters.brand = new RegExp(`^${brand}$`, "i");
-        if (maxPrice) filters.price_range = { $lte: parseInt(maxPrice) };
-        if (type) filters.type = type;
-        if (movement) filters.movement = movement;
-        if (use_case) filters.use_case = use_case;
+        // Loop through query parameters and add them as filters
+        for (let key in req.query) {
+            if (req.query[key]) {
+                // Handle special case for arrays (features)
+                if (key === "features") {
+                    filters[key] = { $in: req.query[key].split(",") }; // Allow multiple feature search
+                } 
+                // Handle case-insensitive string matching
+                else if (typeof req.query[key] === "string") {
+                    filters[key] = new RegExp(req.query[key], "i");
+                } 
+                // Handle number fields
+                else {
+                    filters[key] = req.query[key];
+                }
+            }
+        }
 
-        console.log("Filters applied:", filters); // ✅ Logs applied filters
-
+        console.log("Filters applied:", filters); // Debugging
         const watches = await Watch.find(filters);
-        console.log("Query results:", watches); // ✅ Logs database results
-
         res.json(watches);
     } catch (err) {
-        console.error("Error fetching watches:", err);
         res.status(500).json({ message: err.message });
     }
 });
