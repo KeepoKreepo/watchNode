@@ -35,16 +35,6 @@ const Watch = mongoose.model("Watch", WatchSchema);
 // Get all watches
 app.get("/watches", async (req, res) => {
     try {
-        const watches = await Watch.find();
-        res.json(watches);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-// Add a new watch
-app.get("/watches", async (req, res) => {
-    try {
         const { brand, maxPrice, type, movement, use_case } = req.query;
         let filters = {};
 
@@ -63,6 +53,33 @@ app.get("/watches", async (req, res) => {
     } catch (err) {
         console.error("Error fetching watches:", err);
         res.status(500).json({ message: err.message });
+    }
+});
+
+// Add a new watch
+app.post("/watches", async (req, res) => {
+    const { brand, model, type, movement, price_range, water_resistance_m, features, use_case } = req.body;
+
+    if (!brand || !model || !type || !movement || !price_range || !water_resistance_m || !features || !use_case) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const watch = new Watch({
+        brand,
+        model,
+        type,
+        movement,
+        price_range,
+        water_resistance_m,
+        features,
+        use_case
+    });
+
+    try {
+        const savedWatch = await watch.save();
+        res.status(201).json(savedWatch);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
     }
 });
 
