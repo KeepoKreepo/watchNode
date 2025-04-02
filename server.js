@@ -24,7 +24,8 @@ const WatchSchema = new mongoose.Schema({
     price_range: { type: Number, required: true },
     water_resistance_m: { type: Number, required: true },
     features: { type: [String], required: true },
-    use_case: { type: String, required: true }
+    use_case: { type: String, required: true },
+    images: { type: [String], required: false }
 });
 
 // Create the Watch model based on the schema
@@ -65,7 +66,7 @@ app.get("/watches", async (req, res) => {
 
 // Add a new watch
 app.post("/watches", async (req, res) => {
-    const { brand, model, type, movement, price_range, water_resistance_m, features, use_case } = req.body;
+    const { brand, model, type, movement, price_range, water_resistance_m, features, use_case, images } = req.body;
 
     if (!brand || !model || !type || !movement || !price_range || !water_resistance_m || !features || !use_case) {
         return res.status(400).json({ message: "All fields are required" });
@@ -79,7 +80,8 @@ app.post("/watches", async (req, res) => {
         price_range,
         water_resistance_m,
         features,
-        use_case
+        use_case,
+        images
     });
 
     try {
