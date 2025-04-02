@@ -21,7 +21,7 @@ const WatchSchema = new mongoose.Schema({
     model: { type: String, required: true },
     type: { type: String, required: true },
     movement: { type: String, required: true },
-    price_range: { type: Double, required: true },
+    price_range: { type: String, required: true },
     water_resistance_m: { type: String, required: true },
     features: { type: [String], required: true },
     use_case: { type: String, required: true },
