@@ -23,7 +23,7 @@ const WatchSchema = new mongoose.Schema({
     movement: { type: String, required: true },
     case_material: {type: String, required: true },
     bracelet_material: {type: String, required: true },
-    price_range: { type: Double, required: true },
+    price_range: { type: Number, required: true },
     water_resistance_m: { type: String, required: true },
     diameter: {type: String, required: true},
     features: { type: [String], required: true },
