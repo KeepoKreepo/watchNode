@@ -29,7 +29,7 @@ const WatchSchema = new mongoose.Schema({
     features: { type: [String], required: true },
     use_case: { type: String, required: true },
     images: { type: [String], required: false },
-    description { type: [String], required: true }
+    description: { type: [String], required: true }
 });
 
 // Create the Watch model based on the schema
