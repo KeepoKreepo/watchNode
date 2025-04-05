@@ -23,13 +23,13 @@ const WatchSchema = new mongoose.Schema({
     movement: { type: String, required: true },
     case_material: {type: String, required: true },
     bracelet_material: {type: String, required: true },
-    price_range: { type: String, required: true },
+    price_range: { type: Double, required: true },
     water_resistance_m: { type: String, required: true },
     diameter: {type: String, required: true},
     features: { type: [String], required: true },
     use_case: { type: String, required: true },
-    images: { type: [String], required: false },
-    description: { type: [String], required: true }
+    description: { type: [String], required: true },
+    images: { type: [String], required: false }
 });
 
 // Create the Watch model based on the schema
@@ -70,7 +70,7 @@ app.get("/watches", async (req, res) => {
 
 // Add a new watch
 app.post("/watches", async (req, res) => {
-    const { brand, model, type, movement, case_material, bracelet_material, price_range, water_resistance_m, diameter, features, use_case, images, description } = req.body;
+    const { brand, model, type, movement, case_material, bracelet_material, price_range, water_resistance_m, diameter, features, use_case, description, images } = req.body;
 
     if (!brand || !model || !type || !movement || !case_material || !bracelet_material || !price_range || !water_resistance_m || !diameter || !features || !use_case || !description) {
         return res.status(400).json({ message: "All fields are required" });
@@ -88,8 +88,8 @@ app.post("/watches", async (req, res) => {
         diameter,
         features,
         use_case,
-        images,
-        description
+        description,
+        images
     });
 
     try {
