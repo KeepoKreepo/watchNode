@@ -28,7 +28,7 @@ const WatchSchema = new mongoose.Schema({
     diameter: {type: String, required: true},
     features: { type: [String], required: true },
     use_case: { type: String, required: true },
-    description: { type: [String], required: true },
+    description: { type: String, required: true },
     images: { type: [String], required: false }
 });
 
