@@ -69,7 +69,7 @@ app.get("/watches", async (req, res) => {
 
 // Add a new watch
 app.post("/watches", async (req, res) => {
-    const { brand, model, type, movement, price_range, water_resistance_m, features, use_case, images } = req.body;
+    const { brand, model, type, movement, case_material, bracelet_material, price_range, water_resistance_m, diameter, features, use_case, images } = req.body;
 
     if (!brand || !model || !type || !movement || !price_range || !water_resistance_m || !features || !use_case) {
         return res.status(400).json({ message: "All fields are required" });
