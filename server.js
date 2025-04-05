@@ -21,8 +21,11 @@ const WatchSchema = new mongoose.Schema({
     model: { type: String, required: true },
     type: { type: String, required: true },
     movement: { type: String, required: true },
+    case_material {type: String, required: true},
+    bracelet_material {type: String, required: true},
     price_range: { type: String, required: true },
     water_resistance_m: { type: String, required: true },
+    diameter {type: String, required: true},
     features: { type: [String], required: true },
     use_case: { type: String, required: true },
     images: { type: [String], required: false }
@@ -77,8 +80,11 @@ app.post("/watches", async (req, res) => {
         model,
         type,
         movement,
+        case_material,
+        bracelet_material,
         price_range,
         water_resistance_m,
+        diameter,
         features,
         use_case,
         images
