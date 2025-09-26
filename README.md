@@ -79,7 +79,7 @@ Returns the newly created watch object upon success.
 The API is deployed using [Render](https://render.com/).
 
 ```
-[https://watchshop-api.onrender.com](https://watchapi-r08y.onrender.com/)
+https://watchapi-r08y.onrender.com/
 
 ```
 ---
